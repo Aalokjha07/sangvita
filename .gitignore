@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+.env*.local
+
+ADMIN_SETUP.md
+AGENTS.md
+CLAUDE.md
+AUTH_DOCUMENTATION.md
+AUTH_QUICK_REFERENCE.md
+.env*.local
