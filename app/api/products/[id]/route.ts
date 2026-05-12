@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Product from '@/lib/models/Product';
-export const dynamic = 'force-dynamic';
+import { clearCache } from '@/lib/cache';
 
 export async function GET(
   request: NextRequest, 
-  { params }: { params: Promise<{ id: string }> } // Use Promise here
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await dbConnect();
     
-    // You MUST await params in newer Next.js versions
     const { id } = await params; 
 
     const product = await Product.findById(id);
@@ -19,7 +18,10 @@ export async function GET(
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }
 
-    return NextResponse.json(product);
+    // Set cache headers for individual product (cache for 10 minutes)
+    const response = NextResponse.json(product);
+    response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=1200');
+    return response;
   } catch (error) {
     console.error('Error fetching product:', error);
     return NextResponse.json({ error: 'Failed to fetch product' }, { status: 500 });
@@ -41,6 +43,9 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }
 
+    // Clear cache when product is updated
+    clearCache('products_list');
+
     return NextResponse.json(product);
   } catch (error) {
     console.error('Error updating product:', error);
@@ -53,7 +58,6 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    // 2. Call the correct function name
     await dbConnect(); 
     
     const { id } = await params;
@@ -62,6 +66,9 @@ export async function DELETE(
     if (!deletedProduct) {
       return NextResponse.json({ message: "Product not found" }, { status: 404 });
     }
+
+    // Clear cache when product is deleted
+    clearCache('products_list');
 
     return NextResponse.json({ message: "Product deleted successfully" });
   } catch (error) {

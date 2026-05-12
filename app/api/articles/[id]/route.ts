@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Article from '@/lib/models/Article';
-export const dynamic = 'force-dynamic';
+import { clearCache } from '@/lib/cache';
+
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
@@ -12,7 +13,10 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
 
-    return NextResponse.json(article);
+    // Set cache headers for individual article (cache for 10 minutes)
+    const response = NextResponse.json(article);
+    response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=1200');
+    return response;
   } catch (error) {
     console.error('Error fetching article:', error);
     return NextResponse.json({ error: 'Failed to fetch article' }, { status: 500 });
@@ -34,6 +38,9 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
 
+    // Clear cache when article is updated
+    clearCache('articles_list');
+
     return NextResponse.json(article);
   } catch (error) {
     console.error('Error updating article:', error);
@@ -50,6 +57,9 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     if (!article) {
       return NextResponse.json({ error: 'Article not found' }, { status: 404 });
     }
+
+    // Clear cache when article is deleted
+    clearCache('articles_list');
 
     return NextResponse.json({ message: 'Article deleted successfully' });
   } catch (error) {
