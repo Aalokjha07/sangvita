@@ -250,7 +250,7 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
           {/* Main Image */}
           <div className="relative overflow-hidden rounded-[40px] shadow-2xl aspect-square border-8 border-white rotate-15 scale-[0.92] hover:rotate-0 hover:scale-100 transition-all duration-700">
             <img 
-              src="/director.jpeg"   
+              src="/DIRECTOR.jpeg"   
               alt="Director Prince Kumar Pandey" 
               className="w-full h-full object-cover -rotate-15 scale-100 hover:scale-110 scale-100 transition-transform duration-700"
             />
