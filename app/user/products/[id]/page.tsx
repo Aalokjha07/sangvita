@@ -69,17 +69,78 @@ const whatsappUrl = `https://wa.me/919204665654?text=${encodeURIComponent(messag
     window.open(whatsappUrl, '_blank');
   };
 
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pt-24 pb-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center py-20">
-            <div className="text-4xl text-blue-500">Loading...</div>
+ if (loading) {
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-28">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-10">
+        {/* Main Product Card Skeleton */}
+        <div className="bg-white border border-blue-200 rounded-xl shadow-xl overflow-hidden">
+          
+          {/* Back Button Area */}
+          <div className="absolute top-0 left-0 w-12 h-12 bg-slate-200 rounded-br-xl animate-pulse" />
+
+          <div className="grid md:grid-cols-2 gap-4 p-4 md:p-6">
+            
+            {/* LEFT: Image Section Skeleton */}
+            <div className="flex flex-col">
+              {/* Main Image Skeleton */}
+              <div className="relative aspect-square bg-slate-200 rounded-xl overflow-hidden animate-pulse mb-3">
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-100 animate-shimmer" />
+              </div>
+
+              {/* Thumbnails Skeleton */}
+              <div className="grid grid-cols-4 gap-2">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="aspect-square bg-slate-200 rounded-lg animate-pulse" />
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT: Details Section Skeleton */}
+            <div className="flex flex-col space-y-6 py-2">
+              {/* Category */}
+              <div className="h-4 w-32 bg-slate-200 rounded animate-pulse" />
+
+              {/* Product Name */}
+              <div className="h-9 md:h-10 bg-slate-200 rounded animate-pulse w-4/5" />
+
+              {/* Price Section */}
+              <div className="bg-blue-50 p-5 rounded-xl border border-blue-100">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-36 bg-slate-200 rounded animate-pulse" />
+                  <div className="h-5 w-28 bg-slate-200 rounded animate-pulse" />
+                </div>
+                <div className="mt-4 h-6 w-64 bg-slate-200 rounded animate-pulse" />
+              </div>
+
+              {/* Enquiry Button */}
+              <div className="h-12 w-full bg-slate-200 rounded-lg animate-pulse" />
+
+              {/* Description Section */}
+              <div>
+                <div className="h-5 w-28 bg-slate-200 rounded mb-3 animate-pulse" />
+                <div className="space-y-3">
+                  <div className="h-4 bg-slate-200 rounded animate-pulse" />
+                  <div className="h-4 bg-slate-200 rounded animate-pulse w-[95%]" />
+                  <div className="h-4 bg-slate-200 rounded animate-pulse w-[85%]" />
+                  <div className="h-4 bg-slate-200 rounded animate-pulse" />
+                  <div className="h-4 bg-slate-200 rounded animate-pulse w-[90%]" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
-    );
-  }
+
+        {/* Explore More Section Skeleton */}
+        <div className="mt-16 text-center">
+          <div className="h-8 w-64 bg-slate-200 mx-auto rounded animate-pulse mb-3" />
+          <div className="h-5 w-80 bg-slate-200 mx-auto rounded animate-pulse mb-8" />
+          <div className="h-12 w-48 bg-slate-200 mx-auto rounded-lg animate-pulse" />
+        </div>
+      </div>
+    </main>
+  );
+}
 
   if (!product) {
     return (
@@ -173,7 +234,7 @@ const whatsappUrl = `https://wa.me/919204665654?text=${encodeURIComponent(messag
       {/* Pricing Section: Reduced padding and margin */}
       <div className="bg-blue-50 p-4 rounded-xl mb-4 border border-blue-100">
         <div className="flex items-baseline gap-2">
-          <p className="text-3xl font-bold text-blue-600">₹{product.price.toLocaleString()}</p>
+          <p className="text-4xl font-bold text-blue-600">₹{product.price.toLocaleString()}</p>
           <p className="line-through text-gray-400 text-sm">MRP ₹{product.mrp.toLocaleString()}</p>
         </div>
         

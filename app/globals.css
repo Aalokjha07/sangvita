@@ -35,7 +35,7 @@ p {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;      /* Standard weight for readability */
   line-height: 1.6;     /* Adds nice breathing room between lines */
-  color: #e2e8f0;       /* This matches your text-slate-200/300 look */
+      /* This matches your text-slate-200/300 look */
 }
 @layer utilities {
   @keyframes marquee {
@@ -163,12 +163,12 @@ p {
 
 .prose blockquote {
   border-color: #475569;
-  color: #94a3b8;
+  color: #000000;
 }
 
 /* ====================== RICH TEXT DISPLAY ====================== */
 .rich-text-display {
-  color: #e2e8f0;
+  color: #040404;
 }
 
 .rich-text-display h1,
@@ -177,41 +177,41 @@ p {
 .rich-text-display h4,
 .rich-text-display h5,
 .rich-text-display h6 {
-  color: #f1f5f9;
+  color: #0d0d0d;
   font-weight: 600;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 .rich-text-display p {
-  color: #cbd5e1;
+  color: #000000;
   margin: 0.5rem 0;
 }
 
 .rich-text-display strong {
-  color: #f1f5f9;
+  color: #000000;
   font-weight: 700;
 }
 
 .rich-text-display em {
-  color: #cbd5e1;
+  color: #0a0a0a;
   font-style: italic;
 }
 
 .rich-text-display s {
-  color: #94a3b8;
+  color: #000000;
   text-decoration: line-through;
 }
 
 .rich-text-display ul,
 .rich-text-display ol {
-  color: #cbd5e1;
+  color: #000000;
   margin: 0.5rem 0;
   padding-left: 1.5rem;
 }
 
 .rich-text-display li {
-  color: #cbd5e1;
+  color: #000000;
   margin: 0.25rem 0;
 }
 
@@ -254,6 +254,6 @@ p {
 
 .rich-text-display hr {
   border: none;
-  border-top: 2px solid #334155;
+  border-top: 2px solid #000000;
   margin: 1rem 0;
 }

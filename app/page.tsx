@@ -104,14 +104,14 @@ export default function HomePage() {
         <section
 className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-center text-white overflow-hidden"
   style={{
-    backgroundImage: `url('/hero.jpeg')`,
+    backgroundImage: `url('/last.jpg')`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'top',
     backgroundSize: 'cover',
   }}
 >
   {/* Background Overlay */}
-  <div className="absolute inset-0 z-0 bg-black/50 lg:bg-black/40" />
+  <div className="absolute inset-0 z-0 bg-black/40 lg:bg-black/40" />
 
   {/* Main Content */}
   <div className="relative z-20 w-full max-w-9xl mx-auto px-6 lg:px-12 pt-24 pb-32 lg:py-0">
@@ -120,12 +120,12 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
       {/* 1. TOP: Brand & Text (Order 1 on Mobile) */}
       <div className="text-center lg:text-left order-1">
         {/* Tagline Badge */}
-        <div className="mb-8 inline-flex items-center gap-2 bg-blue-500/20 backdrop-blur-md border border-blue-400/30 px-4 py-1.5 rounded-full">
+        <div className="mb-8 inline-flex items-center gap-2 bg-green-500/20 backdrop-blur-md border border-green-400/30 px-4 py-1.5 rounded-full">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
           </span>
-          <span className="text-blue-100 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em]">
+          <span className="text-green-100 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em]">
             Science of Better Living
           </span>
         </div>
@@ -140,9 +140,11 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
           <div className="flex flex-col">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-none">
               SANGVITA
-              <span className="block text-xl md:text-2xl lg:text-4xl font-light tracking-[0.2em] lg:tracking-[0.3em] text-blue-400 mt-1 uppercase">
-                Nutri Pharma
-              </span>
+              <div className=" inline-flex items-center gap-2 bg-black/10 backdrop-blur-md px-2 py-1 rounded-2xl">
+  <span className="block text-xl md:text-2xl lg:text-4xl font-light tracking-[0.2em] lg:tracking-[0.3em] text-blue-400 mt-1 uppercase">
+    Nutri Pharma
+  </span>
+</div>
             </h1>
           </div>
         </div>
@@ -173,28 +175,8 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
       {/* 2. BOTTOM: Director Section (Order 2 on Mobile) */}
       <div className="flex justify-center lg:justify-end order-2 mt-8 lg:mt-0">
         <div className="relative max-w-[280px] sm:max-w-sm w-full">
-          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 lg:p-6 shadow-2xl">
-            <div className="flex justify-center mb-3">
-              <img
-                src="/image-removebg-preview (1).png"
-                alt="Director Prince Kumar Pandey"
-                className="h-[280px] sm:h-[400px] lg:h-[500px] w-auto object-contain drop-shadow-2xl"
-              />
-            </div>
-
-            <div className="text-center">
-              <p className="text-blue-300 text-[10px] lg:text-xs uppercase tracking-[0.2em] font-semibold mb-1">
-                Director
-              </p>
-              <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">
-                Prince Kumar Pandey
-              </h3>
-              <blockquote className="text-slate-300 text-xs lg:text-sm italic leading-relaxed border-t border-white/10 pt-3">
-                “Building trust through innovation in nutraceutical healthcare.”
-              </blockquote>
-            </div>
-          </div>
-          <div className="absolute -inset-4 bg-blue-500/10 blur-3xl -z-10 rounded-full" />
+          
+         
         </div>
       </div>
     </div>
@@ -227,7 +209,75 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
             </div>
           )}
         </section>
+       {/* ==================== DIRECTOR SECTION ==================== */}
+<section className="bg-white py-16 px-6 md:py-24 overflow-hidden">
+  <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20">
+    
+    {/* Left Side: Quote & Info */}
+    <div className="flex-1 order-2 md:order-1 text-center md:text-left">
+      <div className="relative inline-block md:block">
+        {/* Decorative Quote Mark */}
+        <span className="absolute -top-12 -left-6 text-[120px] text-blue-50 font-serif leading-none select-none md:-left-12 pointer-events-none">
+          “
+        </span>
+        
+        <h2 className="relative z-10 text-xl md:text-xl lg:text-2xl italic font-light text-slate-700 leading-snug mb-10">
+          Building trust through <span className="text-blue-500 font-normal">innovation</span> in nutraceutical healthcare.
+        </h2>
+      </div>
 
+      <div className="space-y-2 border-t border-slate-100 pt-8 inline-block md:block">
+        <h3 className="text-xl md:text-2xl font-bold tracking-[0.1em] text-slate-900 uppercase">
+          SUNGVITA
+        </h3>
+        <p className="text-blue-600 font-medium tracking-widest uppercase text-sm md:text-base">
+          FOUNDER
+        </p>
+      </div>
+    </div>
+
+    {/* Right Side: Image with Rhombus Frame */}
+    <div className="flex-0 w-full max-w-[320px] md:max-w-md order-1 md:order-2">
+      <div className="relative group">
+        
+        {/* Background Decorative Element */}
+        <div className="absolute -inset-6 bg-gradient-to-br from-blue-50 to-slate-100 rounded-3xl transform -rotate-3 transition-transform duration-700 group-hover:rotate-0"></div>
+        
+        {/* Rhombus Frame Container */}
+        <div className="relative mx-auto w-[280px] md:w-[340px] aspect-square">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-slate-700 rounded-[40px] rotate-45 scale-[0.92] shadow-2xl"></div>
+          
+          {/* Main Image */}
+          <div className="relative overflow-hidden rounded-[40px] shadow-2xl aspect-square border-8 border-white rotate-15 scale-[0.92] hover:rotate-0 hover:scale-100 transition-all duration-700">
+            <img 
+              src="/director.jpeg"   
+              alt="Director Prince Kumar Pandey" 
+              className="w-full h-full object-cover -rotate-15 scale-100 hover:scale-110 scale-100 transition-transform duration-700"
+            />
+          </div>
+        </div>
+
+        {/* Floating Branding Badge */}
+       {/* Floating Branding Badge - Visible on all devices */}
+<div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-50 lg:-bottom-6 lg:-right-6 lg:left-auto lg:translate-x-0 
+                bg-blue-600 text-white py-2 px-0 lg:py-4 lg:px-4 W-200 
+                rounded-2xl shadow-xl 
+                text-center lg:text-left
+                transform transition-all duration-300
+                group-hover:-translate-y-2">
+  
+  <p className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-90 text-blue-100">
+    Director
+  </p>
+  <p className="text-lg lg:text-xl font-serif tracking-tight leading-tight">
+    Prince Kumar Pandey
+  </p>
+</div>
+      </div>
+    </div>
+
+  </div>
+</section>
         
 
         {/* ==================== PRODUCTS SECTION ==================== */}
@@ -235,14 +285,14 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4">
               <div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-slate-800">Featured Products</h2>
-                <p className="text-slate-500 mt-2 text-lg">
+                <h2 className="text-3xl sm:text-4xl font-bold text-black">Featured Products</h2>
+                <p className="text-black mt-2 text-lg">
                   Pharmaceutical grade solutions for diverse medical needs.
                 </p>
               </div>
               <Link
                 href="/user/products"
-                className="text-blue-600 font-bold border-b-2 border-blue-600 pb-1 hover:text-blue-800 hover:border-blue-800 transition-all"
+                className="text-green-700 font-bold border-b-2 border-green-500 pb-1 hover:text-green-600 hover:border-green-800 transition-all"
               >
                 View Catalog ⬩➤
               </Link>
@@ -264,7 +314,7 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
      2. Changed p-6 to p-3 for mobile, scaling up to p-8 for desktop
      3. Added flex flex-col to keep buttons aligned
   */
-  className="bg-white-100 rounded-2xl p-3 sm:p-8 border border-blue-400 hover:bg-blue-100 hover:border-blue-200 hover:shadow-lg transition-all text-center flex flex-col h-full"
+  className="bg-white-100 rounded-2xl p-3 sm:p-8 border border-green-400 hover:bg-green-100 hover:border-green-200 hover:shadow-lg transition-all text-center flex flex-col h-full"
 >
   {/* 1. Image Container: reduced margin on mobile */}
   <div className="w-full aspect-square mb-3 sm:mb-6 bg-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center overflow-hidden">
