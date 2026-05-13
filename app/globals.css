@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Roboto:wght@400;500&display=swap');
 @import "tailwindcss";
+
 
 :root {
   --background: #ffffff;
@@ -22,9 +24,19 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
-
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700; /* Bold for that professional pharma look */
+}
+p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;      /* Standard weight for readability */
+  line-height: 1.6;     /* Adds nice breathing room between lines */
+  color: #e2e8f0;       /* This matches your text-slate-200/300 look */
+}
 @layer utilities {
   @keyframes marquee {
     0% { transform: translateX(0); }
@@ -116,30 +128,30 @@ body {
 
 /* ====================== TIPTAP EDITOR STYLING (DARK MODE) ====================== */
 .prose {
-  color: #e2e8f0;
+  color: #000000;
 }
 
 .prose strong {
-  color: #f1f5f9;
+  color: #000000;
   font-weight: 700;
 }
 
 .prose em {
-  color: #cbd5e1;
+  color: #020202;
 }
 
 .prose p {
-  color: #cbd5e1;
+  color: #0c0c0c;
   margin: 0.5rem 0;
 }
 
 .prose ol,
 .prose ul {
-  color: #cbd5e1;
+  color: #000000;
 }
 
 .prose li {
-  color: #cbd5e1;
+  color: #000000;
 }
 
 .prose code {
