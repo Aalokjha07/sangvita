@@ -92,14 +92,14 @@ const AdminProductForm = ({ product, submitLabel, onSave }: AdminProductFormProp
 
     try {
       const productData = {
-  name: name.trim() || "New Product",
-  category: category.trim() || "General",
-  price: price, // Send the raw number: 800
-  mrp: mrp,     // Send the raw number: 1000
-  description: description.trim() || "Product description",
-  images: images,
-  tag: tag.trim() || null,
-};
+        name: name.trim() || "New Product",
+        category: category.trim() || "General",
+        price: price || 0,
+        mrp: mrp || 0,
+        description: description.trim() || "Product description",
+        images: images,
+        tag: tag.trim() || null,
+      };
 
       let response;
       if (product?._id) {
@@ -108,6 +108,7 @@ const AdminProductForm = ({ product, submitLabel, onSave }: AdminProductFormProp
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(productData),
+          credentials: 'include',
         });
       } else {
         // Create new product
@@ -115,12 +116,13 @@ const AdminProductForm = ({ product, submitLabel, onSave }: AdminProductFormProp
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(productData),
+          credentials: 'include',
         });
       }
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Failed to save product");
+        throw new Error(error.error || error.message || "Failed to save product");
       }
 
       const savedProduct = await response.json();

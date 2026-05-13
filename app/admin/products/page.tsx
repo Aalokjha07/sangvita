@@ -98,7 +98,9 @@ export default function AdminProductsPage() {
                 )}
                 <p className="text-sm text-slate-400">{product.category}</p>
                 <h3 className="mt-3 text-2xl font-semibold text-white">{product.name}</h3>
-                <p className="mt-3 text-slate-300 text-sm line-clamp-2">{product.description}</p>
+                <a href={`/admin/products/${product._id}`} className="block mt-3 text-slate-300 text-sm line-clamp-2 hover:text-blue-400 transition cursor-pointer">
+                  {product.description}
+                </a>
                 {product.tag && <p className="mt-2 text-blue-400 text-sm font-semibold">{product.tag}</p>}
               </div>
               <div className="rounded-3xl border border-slate-700 bg-slate-950 px-4 py-3 text-right">
@@ -109,12 +111,12 @@ export default function AdminProductsPage() {
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
+              {/* <a
                 href={`/admin/products/${product._id}`}
                 className="rounded-full border border-blue-500 px-5 py-2 text-sm text-blue-200 transition hover:bg-blue-500/10"
               >
                 Edit
-              </a>
+              </a> */}
               <button
                 onClick={() => handleDelete(product._id)}
                 className="rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-500"

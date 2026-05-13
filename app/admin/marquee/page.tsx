@@ -55,12 +55,12 @@ export default function AdminMarqueePage() {
           <div key={`${item}-${index}`} className="rounded-3xl border border-slate-800 bg-slate-900/90 p-6 shadow-lg flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-slate-200 leading-relaxed">{item}</p>
             <div className="flex flex-wrap gap-3">
-              <button
+              {/* <button
                 onClick={() => handleEdit(index)}
                 className="rounded-full border border-blue-500 px-5 py-2 text-sm text-blue-200 transition hover:bg-blue-500/10"
               >
                 Edit
-              </button>
+              </button> */}
               <button
                 onClick={() => handleDelete(index)}
                 className="rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-500"

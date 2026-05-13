@@ -96,7 +96,9 @@ export default function AdminArticlesPage() {
                     <h3 className="text-xl font-semibold text-white line-clamp-2">{article.title}</h3>
                   </div>
                 </div>
-                <p className="text-slate-300 text-sm line-clamp-2">{article.description}</p>
+                <a href={`/admin/articles/${article._id}`} className="block text-slate-300 text-sm line-clamp-2 hover:text-blue-400 transition cursor-pointer">
+                  {article.description}
+                </a>
                 <p className="text-xs text-slate-500 mt-3">
                   {new Date(article.createdAt).toLocaleDateString()}
                 </p>
@@ -104,12 +106,12 @@ export default function AdminArticlesPage() {
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
+              {/* <a
                 href={`/admin/articles/${article._id}`}
                 className="rounded-full border border-blue-500 px-5 py-2 text-sm text-blue-200 transition hover:bg-blue-500/10"
               >
                 Edit
-              </a>
+              </a> */}
               <button
                 onClick={() => handleDelete(article._id)}
                 className="rounded-full bg-red-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-500"

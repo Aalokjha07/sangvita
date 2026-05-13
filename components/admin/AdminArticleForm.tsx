@@ -95,6 +95,7 @@ const AdminArticleForm = ({ article, submitLabel, onSave }: AdminArticleFormProp
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(articleData),
+          credentials: 'include',
         });
       } else {
         // Create new article
@@ -102,12 +103,13 @@ const AdminArticleForm = ({ article, submitLabel, onSave }: AdminArticleFormProp
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(articleData),
+          credentials: 'include',
         });
       }
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Failed to save article");
+        throw new Error(error.error || error.message || "Failed to save article");
       }
 
       const savedArticle = await response.json();

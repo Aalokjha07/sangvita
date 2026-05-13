@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 // Session storage (in production, use Redis or a database)
 const SESSION_STORE = new Map<string, { userId: string; createdAt: number }>();
-const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours = 1 day (86,400,000 milliseconds)
 const SESSION_COOKIE_NAME = "admin_session_id";
 
 /**
@@ -31,6 +31,7 @@ export function createAdminSession(): string {
 
 /**
  * Verify admin session token
+ * Note: Sessions are rolling - they refresh on each use (last 24 hours from last activity)
  */
 export function verifyAdminSession(token: string): boolean {
   const session = SESSION_STORE.get(token);
@@ -45,7 +46,7 @@ export function verifyAdminSession(token: string): boolean {
     return false;
   }
 
-  // Refresh session timestamp
+  // Refresh session timestamp (rolling session - resets the 24-hour timer on each use)
   session.createdAt = Date.now();
   return true;
 }
