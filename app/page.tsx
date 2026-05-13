@@ -228,7 +228,7 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
 
       <div className="space-y-2 border-t border-slate-100 pt-8 inline-block md:block">
         <h3 className="text-xl md:text-2xl font-bold tracking-[0.1em] text-slate-900 uppercase">
-          SUNGVITA
+          SANGVITA
         </h3>
         <p className="text-blue-600 font-medium tracking-widest uppercase text-sm md:text-base">
           FOUNDER
