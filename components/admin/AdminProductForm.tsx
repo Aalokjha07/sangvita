@@ -50,23 +50,28 @@ const AdminProductForm = ({ product, submitLabel, onSave }: AdminProductFormProp
     setUploadError("");
 
     try {
-      for (const file of Array.from(files)) {
+      // Upload all images in parallel instead of sequentially
+      const uploadPromises = Array.from(files).map(file => {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await fetch("/api/upload", {
+        return fetch("/api/upload", {
           method: "POST",
           body: formData,
+        }).then(async response => {
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || "Upload failed");
+          }
+          return response.json();
         });
+      });
 
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || "Upload failed");
-        }
-
-        const data = await response.json();
-        setImages((prev) => [...prev, data.secure_url]);
-      }
+      // Wait for all uploads to complete
+      const results = await Promise.all(uploadPromises);
+      const uploadedUrls = results.map(data => data.secure_url);
+      
+      setImages((prev) => [...prev, ...uploadedUrls]);
     } catch (error) {
       setUploadError(error instanceof Error ? error.message : "Image upload failed. Please try again.");
       console.error("Upload error:", error);

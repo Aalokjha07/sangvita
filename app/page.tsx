@@ -6,7 +6,7 @@ import { getStoredMarqueeItems } from '@/lib/adminStorage';
 import RichTextDisplay from '@/components/RichTextDisplay';
 
 interface Product {
-  _id?: number;
+  _id?: string;
   name: string;
   category: string;
   price: number;
@@ -65,12 +65,12 @@ export default function HomePage() {
   const fetchProducts = async () => {
     setProductsLoading(true);
     try {
-      const response = await fetch('/api/products', {
+      const response = await fetch('/api/products?limit=8', {
         headers: { 'Cache-Control': 'max-age=300' },
       });
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
-      setFeaturedProducts(data.slice(0, 4));
+      setFeaturedProducts(data.products || []);
     } catch (error) {
       console.error('Error fetching products:', error);
       setFeaturedProducts([]);
@@ -314,7 +314,7 @@ className="relative min-h-[1000px] lg:min-h-[850px] flex items-center justify-ce
      2. Changed p-6 to p-3 for mobile, scaling up to p-8 for desktop
      3. Added flex flex-col to keep buttons aligned
   */
-  className="bg-white-100 rounded-2xl p-3 sm:p-8 border border-green-400 hover:bg-green-100 hover:border-green-200 hover:shadow-lg transition-all text-center flex flex-col h-full"
+  className="bg-white rounded-2xl p-3 sm:p-8 border border-green-400 hover:bg-green-100 hover:border-green-200 hover:shadow-lg transition-all text-center flex flex-col h-full"
 >
   {/* 1. Image Container: reduced margin on mobile */}
   <div className="w-full aspect-square mb-3 sm:mb-6 bg-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center overflow-hidden">

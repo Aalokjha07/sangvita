@@ -52,4 +52,9 @@ const ProductSchema = new Schema<IProduct>(
   }
 );
 
+// Add indexes for optimal query performance
+ProductSchema.index({ createdAt: -1 }); // For sorting products by creation date
+ProductSchema.index({ category: 1 }); // For filtering by category
+ProductSchema.index({ name: 'text' }); // For text search on product names
+
 export default mongoose.models.Product || mongoose.model<IProduct>('Product', ProductSchema);

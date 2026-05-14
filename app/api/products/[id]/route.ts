@@ -12,7 +12,8 @@ export async function GET(
     
     const { id } = await params; 
 
-    const product = await Product.findById(id);
+    // Use lean() for better performance when not modifying
+    const product = await Product.findById(id).lean();
 
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
@@ -43,7 +44,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }
 
-    // Clear cache when product is updated
+    // Clear all product list caches when product is updated
     clearCache('products_list');
 
     return NextResponse.json(product);
@@ -67,7 +68,7 @@ export async function DELETE(
       return NextResponse.json({ message: "Product not found" }, { status: 404 });
     }
 
-    // Clear cache when product is deleted
+    // Clear all product list caches when product is deleted
     clearCache('products_list');
 
     return NextResponse.json({ message: "Product deleted successfully" });

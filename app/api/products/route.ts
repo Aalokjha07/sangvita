@@ -3,19 +3,51 @@ import dbConnect from '@/lib/mongodb';
 import Product from '@/lib/models/Product';
 import { cachedRequest, CACHE_TTL, clearCache } from '@/lib/cache';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const products = await cachedRequest(
-      'products_list',
+    const { searchParams } = new URL(request.url);
+    const page = Math.max(1, parseInt(searchParams.get('page') || '1'));
+    const limit = Math.min(50, parseInt(searchParams.get('limit') || '20')); // Max 50 items per page
+    const skip = (page - 1) * limit;
+    const category = searchParams.get('category') || '';
+
+    // Create cache key based on query params
+    const cacheKey = `products_list_p${page}_l${limit}${category ? '_c' + category : ''}`;
+
+    const result = await cachedRequest(
+      cacheKey,
       CACHE_TTL.PRODUCTS,
       async () => {
         await dbConnect();
-        return await Product.find({}).sort({ createdAt: -1 });
+        
+        // Build query filter
+        const query = category ? { category: { $regex: category, $options: 'i' } } : {};
+
+        // Fetch paginated products with optimized fields
+        const [products, total] = await Promise.all([
+          Product.find(query)
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit)
+            .select('name category price mrp description images tag createdAt _id')
+            .lean(), // Use lean() for faster queries when not modifying
+          Product.countDocuments(query),
+        ]);
+
+        return {
+          products,
+          pagination: {
+            total,
+            page,
+            limit,
+            totalPages: Math.ceil(total / limit),
+          },
+        };
       }
     );
 
     // Set cache headers for HTTP caching (browser + CDN)
-    const response = NextResponse.json(products);
+    const response = NextResponse.json(result);
     response.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=600');
     response.headers.set('Content-Type', 'application/json');
     return response;
@@ -48,7 +80,7 @@ export async function POST(request: NextRequest) {
       tag: data.tag || null,
     });
 
-    // Clear cache when new product is created
+    // Clear all product list caches when new product is created
     clearCache('products_list');
 
     return NextResponse.json(product, { status: 201 });
