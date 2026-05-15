@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: 'https://sangvita.in/user/products',
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 1.2,
+      priority: 1,
     },
     {
       url: 'https://sangvita.in/user/about',
