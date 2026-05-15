@@ -1,44 +1,71 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import type { Metadata } from 'next';
+import ClientLayout from "@/components/ClientLayout"; // Check this path!
 import "./globals.css";
-import { useEffect, useState } from "react";
+
+export const metadata: Metadata = {
+  title: 'Sangvita Nutri Pharma | Science of Better Living',
+  icons: {
+    icon: '/logo2.png',
+    shortcut: '/logo2.png',
+    apple: '/logo2.png',
+  },
+  description: 'Leading nutraceutical manufacturer in Bihar. High-quality tablets, capsules, and wellness solutions for metabolic health and immunity.',
+  keywords: ['Nutraceuticals Bihar', 'Sangvita Nutri Pharma', 'Health Supplements India', 'Metabolic Wellness', 'Science of Better Living'],
+  metadataBase: new URL('https://sangvita.in'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Sangvita Nutri Pharma - Science of Better Living',
+    description: 'Advanced nutraceutical formulations for a healthier future.',
+    url: 'https://sangvita.in',
+    siteName: 'Sangvita Nutri Pharma',
+    images: [{ url: '/logo.jpeg', width: 800, height: 600, alt: 'Sangvita Nutri Pharma Logo' }],
+    locale: 'en_IN',
+    type: 'website',
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isAdminRoute = pathname.startsWith("/admin");
-  const isProductsRoute = pathname.startsWith("/user/products/");
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Detect when homepage is loading (simple approach)
-  useEffect(() => {
-    // If we're on homepage, wait a bit then hide loader
-    if (pathname === "/" || pathname === "") {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 3000); // Match with your loader timing
-
-      return () => clearTimeout(timer);
-    } else {
-      setIsLoading(false);
-    }
-  }, [pathname]);
-
-  const showHeaderFooter = !isAdminRoute && !isProductsRoute && !isLoading;
-
   return (
     <html lang="en">
+      <head>
+        {/* Flipkart-style Sitelinks & Social Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Sangvita Nutri Pharma",
+              "url": "https://sangvita.in",
+              "logo": "https://sangvita.in/logo.jpeg",
+              "sameAs": [
+                "https://www.instagram.com/sangvita_nutri_pharma",
+                "https://www.linkedin.com/company/sangvita-nutri-pharma",
+                "https://www.facebook.com/share/1HWiNv7U8t/"
+              ],
+              "hasPart": [
+                {
+                  "@type": "WebPage",
+                  "name": "Our Products",
+                  "url": "https://sangvita.in/user/products"
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "About Us",
+                  "url": "https://sangvita.in/user/about"
+                }
+              ]
+            }),
+          }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen">
-        {showHeaderFooter && <Header />}
-        
-        <main className="flex-grow">
+        {/* We wrap everything in the ClientLayout to handle the Header/Footer logic */}
+        <ClientLayout>
           {children}
-        </main>
-
-        {showHeaderFooter && <Footer />}
+        </ClientLayout>
       </body>
     </html>
   );
